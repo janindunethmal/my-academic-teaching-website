@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Website Editor</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Segoe UI',Tahoma,sans-serif;background:#f0f2f5;color:#333}
+        .hdr{background:#007897;color:#fff;padding:20px 30px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+        .hdr h1{font-size:1.5em}.hdr p{opacity:.85;font-size:.9em;margin-top:4px}
+        .tabs{display:flex;background:#005f73;padding:0 20px}
+        .tab{padding:12px 24px;cursor:pointer;color:rgba(255,255,255,.7);border-bottom:3px solid transparent;font-size:.95em;user-select:none}
+        .tab:hover{color:#fff;background:rgba(255,255,255,.05)}
+        .tab.on{color:#fff;border-bottom-color:#fff;background:rgba(255,255,255,.1)}
+        .wrap{max-width:1000px;margin:0 auto;padding:30px 20px}
+        .pnl{display:none}.pnl.on{display:block}
+        .card{background:#fff;border-radius:8px;padding:25px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+        .card h2{color:#007897;margin-bottom:20px;font-size:1.3em;border-bottom:2px solid #007897;padding-bottom:8px}
+        .card h3{color:#007897;margin:20px 0 10px;font-size:1.1em}
+        label{display:block;font-weight:600;margin-bottom:5px;color:#555;font-size:.9em}
+        input[type=text],textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:5px;font-size:.95em;font-family:inherit}
+        input[type=text]:focus,textarea:focus{outline:none;border-color:#007897;box-shadow:0 0 0 2px rgba(0,120,151,.15)}
+        textarea{resize:vertical;min-height:80px}
+        .row2{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px}
+        .fg{margin-bottom:15px}
+        .btn{padding:10px 20px;border:none;border-radius:5px;cursor:pointer;font-size:.9em;font-weight:600}
+        .bp{background:#007897;color:#fff}.bp:hover{background:#005f73}
+        .bg{background:#27ae60;color:#fff}.bg:hover{background:#219a52}
+        .br{background:#e74c3c;color:#fff}.br:hover{background:#c0392b}
+        .bo{background:transparent;border:2px solid #007897;color:#007897}.bo:hover{background:#007897;color:#fff}
+        .bs{padding:6px 14px;font-size:.8em}
+        .bgrp{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
+        .wi{display:grid;grid-template-columns:50px 1fr 1fr 90px;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid #eee}
+        .wi input{padding:6px 8px;font-size:.85em}
+        .wh{display:grid;grid-template-columns:50px 1fr 1fr 90px;gap:8px;padding:6px 0;border-bottom:2px solid #007897;font-weight:700;color:#007897;font-size:.85em}
+        .note{background:#f8f9fa;border-left:4px solid #007897;padding:15px 20px;margin-bottom:20px;border-radius:0 6px 6px 0;font-size:.9em;line-height:1.8;color:#555}
+        .note b{color:#007897}
+        .dlgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:15px}
+        .dlcard{background:#f0f2f5;border-radius:6px;padding:15px;text-align:center}
+        .dlcard p{margin-bottom:10px;font-weight:600}
+        .empty{text-align:center;padding:40px;color:#999}
+        .sdiv{border:none;border-top:2px solid #eee;margin:25px 0}
+        .mtable{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9em}
+        .mtable th{text-align:left;padding:8px 10px;background:#007897;color:#fff;font-weight:600}
+        .mtable td{padding:7px 10px;border-bottom:1px solid #eee}
+        .mtable tr:hover{background:#f0f7fa}
+        .mtable .ok{color:#27ae60;font-weight:700}.mtable .miss{color:#e74c3c;font-weight:700}
+        .mtable code{background:#f0f2f5;padding:2px 6px;border-radius:3px;font-size:.85em}
+        .folder-box{background:#1a1a2e;color:#a8e6cf;padding:12px 16px;border-radius:6px;font-family:monospace;font-size:.9em;margin:10px 0;word-break:break-all;position:relative}
+        .folder-box .cpbtn{position:absolute;right:8px;top:8px;background:#007897;color:#fff;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;font-size:.8em}
+        .folder-box .cpbtn:hover{background:#005f73}
+        .dropzone{border:3px dashed #007897;border-radius:8px;padding:30px;text-align:center;margin:15px 0;cursor:pointer;transition:background .2s;color:#007897;font-size:1em}
+        .dropzone:hover,.dropzone.over{background:#e8f4f8}
+        .dropzone input{display:none}
+        .sumbox{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:15px 0}
+        .sumitem{background:#f0f2f5;border-radius:6px;padding:15px;text-align:center}
+        .sumitem .num{font-size:2em;font-weight:700;color:#007897}
+        .sumitem .lbl{font-size:.85em;color:#777;margin-top:4px}
+        @media(max-width:700px){.row2{grid-template-columns:1fr}.wi{grid-template-columns:1fr;gap:5px}.wh{display:none}.wi input::placeholder{font-weight:600;color:#007897}.sumbox{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+<div class="hdr"><h1>Website Editor</h1><p>Edit everything through forms, then download updated files.</p></div>
+<div class="tabs" id="tabs">
+    <div class="tab on" data-p="profile">Profile</div>
+    <div class="tab" data-p="courses">Courses</div>
+    <div class="tab" data-p="materials">Materials</div>
+    <div class="tab" data-p="download">Download Files</div>
+</div>
+<div class="wrap">
+    <div id="pnl-profile" class="pnl on">
+        <div class="card">
+            <h2>Personal Information</h2>
+            <div class="row2"><div class="fg"><label>Full Name</label><input type="text" id="p-name" /></div><div class="fg"><label>Title / Tagline</label><input type="text" id="p-tag" /></div></div>
+            <div class="fg"><label>About Me</label><textarea id="p-about" rows="4"></textarea></div>
+            <div class="row2"><div class="fg"><label>Department</label><input type="text" id="p-dept" /></div><div class="fg"><label>University</label><input type="text" id="p-uni" /></div></div>
+            <div class="row2"><div class="fg"><label>Email</label><input type="text" id="p-email" /></div><div class="fg"><label>Office Room</label><input type="text" id="p-office" /></div></div>
+            <div class="fg"><label>Office Hours (one per line)</label><textarea id="p-hours" rows="3"></textarea></div>
+            <div class="fg"><label>Research Interests</label><textarea id="p-research" rows="2"></textarea></div>
+            <div class="bgrp"><button class="btn bp" id="btn-save-profile">Save Profile</button></div>
+        </div>
+    </div>
+    <div id="pnl-courses" class="pnl">
+        <div class="note"><b>How to add a course:</b> Click "Add New Course", fill in the details, add weekly topics with PDF filenames, then "Save All Courses", then go to Download Files tab.</div>
+        <div id="courses-list"></div>
+        <div class="bgrp"><button class="btn bg" id="btn-add-course">+ Add New Course</button><button class="btn bp" id="btn-save-courses">Save All Courses</button></div>
+    </div>
+    <div id="pnl-materials" class="pnl">
+        <div class="note"><b>Upload PDFs:</b> Select your PDF files below. The editor will check which files match your course schedule and show you where to place them in your website folder.</div>
+        <div class="card">
+            <h2>Select PDF Files</h2>
+            <div class="dropzone" id="dropzone">
+                <p><b>Click here or drag & drop your PDF files</b></p>
+                <p style="font-size:.85em;margin-top:5px;color:#777">Select all lecture notes and assignment PDFs at once</p>
+                <input type="file" id="file-input" multiple accept=".pdf" />
+            </div>
+        </div>
+        <div id="materials-output"></div>
+    </div>
+    <div id="pnl-download" class="pnl">
+        <div class="card">
+            <h2>Download Updated Files</h2>
+            <div class="note">Click <b>Generate All Files</b>, then download each file and replace the old ones in your website folder.</div>
+            <div class="bgrp" style="margin-bottom:20px"><button class="btn bp" id="btn-generate">Generate All Files</button></div>
+            <div id="dl-btns" class="dlgrid" style="display:none"></div>
+        </div>
+        <div class="card">
+            <h2>Steps</h2>
+            <div class="note">
+                1. Edit Profile and Courses tabs<br>
+                2. Click Save on each tab<br>
+                3. Go to Download Files tab<br>
+                4. Click Generate All Files<br>
+                5. Download each file, replace old ones<br>
+                6. Drop PDFs into materials/course-name/<br>
+                7. Push to GitHub
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+var P={name:'Janindu Nethmal',tag:'Lecturer | Researcher | Educator',about:'Welcome to my academic homepage. I am a lecturer passionate about teaching mathematics and its applications. This website serves as a central hub for my teaching materials, course pages, and academic resources.\n\nHere you will find lecture notes, assignments, project repositories, and other resources for the courses I teach. All materials are organized by course and updated regularly throughout the semester.',dept:'Department of Mathematics',uni:'University Name',email:'janindu@example.com',office:'Mathematics Building, Room 205',hours:'Wednesday: 2:00 PM - 4:00 PM\nFriday: 10:00 AM - 12:00 PM\nOr by appointment',research:'Pure mathematics, applied mathematics, mathematical education, and computational methods.'};
+
+var C=[
+{id:'c1',code:'FMS.011',title:'Core Mathematics I &mdash; 2026 Semester II - GISM',slug:'FMS.011 Core Mathematics I - 2026 Semester II',onedrive:'#',category:'current',desc:'Algebra, linear equations, matrices, vectors, calculus, mathematical modelling, and computational software tools.',fdesc:'This module provides a rigorous foundation in mathematical reasoning through algebra, systems of linear equations, matrices, vectors, calculus fundamentals, mathematical modelling, and their applications. The course is designed to build the mathematical maturity required for further studies in mathematics, engineering, and the sciences.',sem:'Fall 2026',sched:'Mon/Wed 10:00 AM - 11:30 AM',room:'Mathematics Building, Room 301',preq:'None. This course is designed for first-year mathematics students.',credits:'15',lectures:'12 Sessions \u00d7 3 Hours = 36 Hours',tutorials:'12 Sessions \u00d7 1 Hour = 12 Hours',independent:'48 \u00d7 2 = 96 Hours',
+tb:'CALCULUS: EARLY TRANSCENDENTALS \u2014 Howard Anton, Irl C. Bivens, Stephen Davis \u2014 10th Edition, Wiley \u2014 ISBN: 978-0470647691',
+tb2:'LINEAR ALGEBRA AND ITS APPLICATIONS \u2014 David Lay, Steven Lay, Judi McDonald \u2014 5th Edition, Pearson \u2014 ISBN: 978-0321982384',
+outcomes:[
+'Describe and apply methods for solving systems of linear equations using algebraic and matrix-based techniques.',
+'Demonstrate knowledge and understanding of matrices and their operations.',
+'Apply vectors, lines, and planes in two- and three-dimensional space.',
+'Demonstrate an understanding of limits and continuity of functions.',
+'Calculate derivatives and integrals of simple functions and apply them to practical applications.',
+'Translate real-world problems into mathematical models.',
+'Demonstrate computational skills using mathematical software tools.'
+],
+assessment:[{name:'Assignment 1',weight:'10%'},{name:'Assignment 2',weight:'10%'},{name:'Mid Examination',weight:'20%'},{name:'Final Examination',weight:'60%'}],
+weeks:[
+{w:1,t:'Introduction and review of algebra',n:'week01-intro.pdf',a:''},
+{w:2,t:'Systems of linear equations',n:'week02-linear.pdf',a:''},
+{w:3,t:'Matrices and operations',n:'week03-matrices.pdf',a:''},
+{w:4,t:'Vectors in 2D and 3D',n:'week04-vectors.pdf',a:''},
+{w:5,t:'Lines and planes',n:'week05-lines.pdf',a:''},
+{w:6,t:'Revision',n:'week06-revision.pdf',a:''},
+{w:7,t:'Limits and continuity',n:'week07-limits.pdf',a:''},
+{w:8,t:'Differentiation',n:'week08-differentiation.pdf',a:''},
+{w:9,t:'Applications of derivatives',n:'week09-derivatives.pdf',a:''},
+{w:10,t:'Integration',n:'week10-integration.pdf',a:''},
+{w:11,t:'Mathematical modelling and software applications',n:'week11-modelling.pdf',a:''},
+{w:12,t:'Revision',n:'week12-revision.pdf',a:''}
+],
+weeks2:[
+{start:1,end:6,assign:'Assignment 1',desc:'Covers Weeks 1-6'},
+{start:7,end:12,assign:'Assignment 2',desc:'Covers Weeks 7-12'}
+],
+after:[
+'Study Break and Final Examination Preparation',
+'Final Examination',
+'Release of Overall Results and Module Evaluation',
+'Completion of the Module'
+],
+assigns:[
+{name:'Assignment 1',file:'assignment1.pdf',desc:'Covers Weeks 1-6: Algebra, Linear Equations, Matrices, Vectors, Lines & Planes',weight:'10%',sol:''},
+{name:'Assignment 2',file:'assignment2.pdf',desc:'Covers Weeks 7-12: Limits, Differentiation, Derivatives, Integration, Modelling',weight:'10%',sol:''}
+]
+},
+{id:'c2',code:'FMS.021',title:'Core Mathematics II &mdash; 2026 Semester II - GISM',slug:'FMS.021 Core Mathematics II - 2026 Semester II',onedrive:'#',category:'current',desc:'Complex numbers, eigenvalues, linear programming, differential equations, integration, and computational methods.',fdesc:'This module builds on Core Mathematics I and covers complex numbers, eigenvalues and eigenvectors, linear programming, first-order differential equations, integration techniques, mathematical modelling, and computational methods. Students will develop a deep understanding of advanced mathematical concepts with applications in engineering and the physical sciences.',sem:'Fall 2026',sched:'Tue/Thu 1:00 PM - 2:30 PM',room:'Mathematics Building, Room 105',preq:'FMS.011 \u2013 Core Mathematics I',credits:'15',lectures:'12 Sessions \u00d7 3 Hours = 36 Hours',tutorials:'12 Sessions \u00d7 1 Hour = 12 Hours',independent:'48 \u00d7 2 = 96 Hours',
+tb:'CALCULUS: EARLY TRANSCENDENTALS \u2014 Howard Anton, Irl C. Bivens, Stephen Davis \u2014 10th Edition, Wiley \u2014 ISBN: 978-0470647691',
+tb2:'LINEAR ALGEBRA AND ITS APPLICATIONS \u2014 David Lay, Steven Lay, Judi McDonald \u2014 5th Edition, Pearson \u2014 ISBN: 978-0321982384',
+outcomes:[
+'Demonstrate proficiency with the algebra and geometry of complex numbers.',
+'Translate problems into mathematical models and apply the concepts and techniques of basic calculus and linear algebra to a wide variety of applications.',
+'Use computer software (such as MATLAB) to carry out graphical, numerical and symbolic investigations.',
+'Calculate determinants, eigenvalues and eigenvectors of up to 3-by-3 matrices.',
+'Formulate, solve and analyse linear programming problems.',
+'Solve simple first-order differential equations and competently calculate integrals.'
+],
+assessment:[{name:'Assignment 1',weight:'10%'},{name:'Assignment 2',weight:'10%'},{name:'Mid Examination',weight:'20%'},{name:'Final Examination',weight:'60%'}],
+weeks:[
+{w:1,t:'Introduction and review of Core Mathematics I concepts',n:'week01-review.pdf',a:''},
+{w:2,t:'Complex numbers and their geometry',n:'week02-complex.pdf',a:''},
+{w:3,t:'Complex numbers and their geometry',n:'week03-complex.pdf',a:''},
+{w:4,t:'Eigenvalues and eigenvectors',n:'week04-eigenvalues.pdf',a:''},
+{w:5,t:'Linear programming problems',n:'week05-lp.pdf',a:''},
+{w:6,t:'Revision',n:'week06-revision.pdf',a:''},
+{w:7,t:'First-order differential equations',n:'week07-ode.pdf',a:''},
+{w:8,t:'Applications of differential equations',n:'week08-ode-apps.pdf',a:''},
+{w:9,t:'Integration techniques',n:'week09-integration.pdf',a:''},
+{w:10,t:'Mathematical modelling and optimisation',n:'week10-modelling.pdf',a:''},
+{w:11,t:'Computational methods using software tools',n:'week11-computational.pdf',a:''},
+{w:12,t:'Revision',n:'week12-revision.pdf',a:''}
+],
+weeks2:[
+{start:1,end:6,assign:'Assignment 1',desc:'Covers Weeks 1-6'},
+{start:7,end:12,assign:'Assignment 2',desc:'Covers Weeks 7-12'}
+],
+after:[
+'Study Break and Final Examination Preparation',
+'Final Examination',
+'Release of Overall Results and Module Evaluation',
+'Completion of the Module'
+],
+assigns:[
+{name:'Assignment 1',file:'assignment1.pdf',desc:'Covers Weeks 1-6: Review, Complex Numbers, Eigenvalues, Linear Programming, Revision',weight:'10%',sol:''},
+{name:'Assignment 2',file:'assignment2.pdf',desc:'Covers Weeks 7-12: Differential Equations, Integration, Modelling, Computational Methods, Revision',weight:'10%',sol:''}
+]
+},
+{id:'c3',code:'FMS.011',title:'Core Mathematics I &mdash; 2026 Semester I - GISM',slug:'FMS.011 Core Mathematics I - 2026 Semester I',onedrive:'#',category:'past',desc:'Algebra, linear equations, matrices, vectors, calculus, mathematical modelling, and computational software tools.',fdesc:'This module provides a rigorous foundation in mathematical reasoning through algebra, systems of linear equations, matrices, vectors, calculus fundamentals, mathematical modelling, and their applications. The course is designed to build the mathematical maturity required for further studies in mathematics, engineering, and the sciences.',sem:'2026 Semester I',sched:'',room:'',preq:'None. This course is designed for first-year mathematics students.',credits:'15',lectures:'12 Sessions \u00d7 3 Hours = 36 Hours',tutorials:'12 Sessions \u00d7 1 Hour = 12 Hours',independent:'48 \u00d7 2 = 96 Hours',
+tb:'CALCULUS: EARLY TRANSCENDENTALS \u2014 Howard Anton, Irl C. Bivens, Stephen Davis \u2014 10th Edition, Wiley \u2014 ISBN: 978-0470647691',
+tb2:'LINEAR ALGEBRA AND ITS APPLICATIONS \u2014 David Lay, Steven Lay, Judi McDonald \u2014 5th Edition, Pearson \u2014 ISBN: 978-0321982384',
+outcomes:[
+'Describe and apply methods for solving systems of linear equations using algebraic and matrix-based techniques.',
+'Demonstrate knowledge and understanding of matrices and their operations.',
+'Apply vectors, lines, and planes in two- and three-dimensional space.',
+'Demonstrate an understanding of limits and continuity of functions.',
+'Calculate derivatives and integrals of simple functions and apply them to practical applications.',
+'Translate real-world problems into mathematical models.',
+'Demonstrate computational skills using mathematical software tools.'
+],
+assessment:[{name:'Assignment 1',weight:'10%'},{name:'Assignment 2',weight:'10%'},{name:'Mid Examination',weight:'20%'},{name:'Final Examination',weight:'60%'}],
+weeks:[
+{w:1,t:'Introduction and review of algebra',n:'week01-intro.pdf',a:''},
+{w:2,t:'Systems of linear equations',n:'week02-linear.pdf',a:''},
+{w:3,t:'Matrices and operations',n:'week03-matrices.pdf',a:''},
+{w:4,t:'Vectors in 2D and 3D',n:'week04-vectors.pdf',a:''},
+{w:5,t:'Lines and planes',n:'week05-lines.pdf',a:''},
+{w:6,t:'Revision',n:'week06-revision.pdf',a:''},
+{w:7,t:'Limits and continuity',n:'week07-limits.pdf',a:''},
+{w:8,t:'Differentiation',n:'week08-differentiation.pdf',a:''},
+{w:9,t:'Applications of derivatives',n:'week09-derivatives.pdf',a:''},
+{w:10,t:'Integration',n:'week10-integration.pdf',a:''},
+{w:11,t:'Mathematical modelling and software applications',n:'week11-modelling.pdf',a:''},
+{w:12,t:'Revision',n:'week12-revision.pdf',a:''}
+],
+weeks2:[
+{start:1,end:6,assign:'Assignment 1',desc:'Covers Weeks 1-6'},
+{start:7,end:12,assign:'Assignment 2',desc:'Covers Weeks 7-12'}
+],
+after:[
+'Study Break and Final Examination Preparation',
+'Final Examination',
+'Release of Overall Results and Module Evaluation',
+'Completion of the Module'
+],
+assigns:[
+{name:'Assignment 1',file:'assignment1.pdf',desc:'Covers Weeks 1-6: Algebra, Linear Equations, Matrices, Vectors, Lines & Planes',weight:'10%',sol:''},
+{name:'Assignment 2',file:'assignment2.pdf',desc:'Covers Weeks 7-12: Limits, Differentiation, Derivatives, Integration, Modelling',weight:'10%',sol:''}
+]
+},
+{id:'c4',code:'',title:'Intensive Mathematics Course 2026 &mdash; 10 Days - UoC Tech',slug:'course-intensive-maths-uoc-tech',onedrive:'#',category:'past',desc:'An intensive 10-day course covering core mathematical concepts for university-level studies. (08 June - 19 June)',fdesc:'This intensive 10-day mathematics course covers core mathematical concepts including algebra, linear equations, matrices, vectors, calculus fundamentals, and mathematical modelling. Designed to provide a condensed yet comprehensive foundation in essential mathematics for university-level studies.',sem:'June 2026',sched:'08 June - 19 June 2026',room:'Faculty of Technology, University of Colombo',preq:'None',credits:'',lectures:'',tutorials:'',independent:'',
+tb:'',tb2:'',outcomes:[],assessment:[],weeks:[],weeks2:[],after:[],assigns:[]
+}
+];
+
+document.getElementById('tabs').onclick=function(e){
+    var t=e.target;if(!t.classList.contains('tab'))return;
+    var p=t.getAttribute('data-p');
+    var tabs=document.querySelectorAll('.tab');for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('on');
+    var pnls=document.querySelectorAll('.pnl');for(var i=0;i<pnls.length;i++)pnls[i].classList.remove('on');
+    t.classList.add('on');
+    document.getElementById('pnl-'+p).classList.add('on');
+    if(p==='materials')renderMaterials();
+};
+
+function loadP(){
+    var s=localStorage.getItem('ep');if(s)P=JSON.parse(s);
+    document.getElementById('p-name').value=P.name;
+    document.getElementById('p-tag').value=P.tag;
+    document.getElementById('p-about').value=P.about;
+    document.getElementById('p-dept').value=P.dept;
+    document.getElementById('p-uni').value=P.uni;
+    document.getElementById('p-email').value=P.email;
+    document.getElementById('p-office').value=P.office;
+    document.getElementById('p-hours').value=P.hours;
+    document.getElementById('p-research').value=P.research;
+}
+function saveP(){
+    P.name=v('p-name');P.tag=v('p-tag');P.about=v('p-about');P.dept=v('p-dept');P.uni=v('p-uni');P.email=v('p-email');P.office=v('p-office');P.hours=v('p-hours');P.research=v('p-research');
+    localStorage.setItem('ep',JSON.stringify(P));alert('Profile saved!');
+}
+function loadC(){var s=localStorage.getItem('ec');if(s)C=JSON.parse(s);renderC();}
+function saveC(){readC();localStorage.setItem('ec',JSON.stringify(C));alert('Courses saved!');}
+function v(id){return document.getElementById(id).value;}
+
+function renderC(){
+    var el=document.getElementById('courses-list');
+    if(C.length===0){el.innerHTML='<div class="empty"><p>No courses yet. Click "Add New Course".</p></div>';return;}
+    var h='';
+    for(var i=0;i<C.length;i++)h+=courseCard(i);
+    el.innerHTML=h;
+}
+function courseCard(i){
+    var c=C[i];
+    var wh='';for(var j=0;j<c.weeks.length;j++){var w=c.weeks[j];wh+='<div class="wi"><input type="text" value="'+H(w.w)+'" data-c="'+i+'" data-w="'+j+'" data-f="w" placeholder="Week"/><input type="text" value="'+H(w.t)+'" data-c="'+i+'" data-w="'+j+'" data-f="t" placeholder="Topic"/><input type="text" value="'+H(w.n)+'" data-c="'+i+'" data-w="'+j+'" data-f="n" placeholder="notes.pdf"/><input type="text" value="'+H(w.a)+'" data-c="'+i+'" data-w="'+j+'" data-f="a" placeholder="assign.pdf"/></div>';}
+    var ah='';for(var j=0;j<c.assigns.length;j++){var a=c.assigns[j];ah+='<div class="wi"><input type="text" value="'+H(a.name)+'" data-c="'+i+'" data-a="'+j+'" data-f="name" placeholder="Name"/><input type="text" value="'+H(a.desc)+'" data-c="'+i+'" data-a="'+j+'" data-f="desc" placeholder="Description"/><input type="text" value="'+H(a.weight)+'" data-c="'+i+'" data-a="'+j+'" data-f="weight" placeholder="Weight"/><input type="text" value="'+H(a.file)+'" data-c="'+i+'" data-a="'+j+'" data-f="file" placeholder="file.pdf"/></div>';}
+    return '<div class="card" id="cc-'+i+'">'+
+    '<button class="btn br bs" style="float:right" onclick="rmC('+i+')">Remove</button>'+
+    '<h2>'+H(c.code)+' - '+H(c.title)+'</h2>'+
+    '<div class="row2"><div class="fg"><label>Course Code</label><input type="text" value="'+H(c.code)+'" data-c="'+i+'" data-f="code"/></div><div class="fg"><label>Course Title</label><input type="text" value="'+H(c.title)+'" data-c="'+i+'" data-f="title"/></div></div>'+
+    '<div class="fg"><label>URL Slug</label><input type="text" value="'+H(c.slug)+'" data-c="'+i+'" data-f="slug"/></div>'+
+    '<div class="fg"><label>OneDrive Link</label><input type="text" value="'+H(c.onedrive||'')+'" data-c="'+i+'" data-f="onedrive"/></div>'+
+    '<div class="fg"><label>Category</label><input type="text" value="'+H(c.category||'current')+'" data-c="'+i+'" data-f="category" placeholder="current or past"/></div>'+
+    '<div class="fg"><label>Short Description</label><input type="text" value="'+H(c.desc)+'" data-c="'+i+'" data-f="desc"/></div>'+
+    '<div class="fg"><label>Full Description</label><textarea data-c="'+i+'" data-f="fdesc">'+H(c.fdesc)+'</textarea></div>'+
+    '<div class="row2"><div class="fg"><label>Semester</label><input type="text" value="'+H(c.sem)+'" data-c="'+i+'" data-f="sem"/></div><div class="fg"><label>Schedule</label><input type="text" value="'+H(c.sched)+'" data-c="'+i+'" data-f="sched"/></div></div>'+
+    '<div class="row2"><div class="fg"><label>Room</label><input type="text" value="'+H(c.room)+'" data-c="'+i+'" data-f="room"/></div><div class="fg"><label>Prerequisites</label><input type="text" value="'+H(c.preq)+'" data-c="'+i+'" data-f="preq"/></div></div>'+
+    '<div class="row2"><div class="fg"><label>Credits</label><input type="text" value="'+H(c.credits)+'" data-c="'+i+'" data-f="credits"/></div><div class="fg"><label>Lectures</label><input type="text" value="'+H(c.lectures)+'" data-c="'+i+'" data-f="lectures"/></div></div>'+
+    '<div class="row2"><div class="fg"><label>Tutorials</label><input type="text" value="'+H(c.tutorials)+'" data-c="'+i+'" data-f="tutorials"/></div><div class="fg"><label>Independent Learning</label><input type="text" value="'+H(c.independent)+'" data-c="'+i+'" data-f="independent"/></div></div>'+
+    '<hr class="sdiv"/><h3>Weekly Schedule (PDF filenames)</h3>'+
+    '<div class="wh"><span>#</span><span>Topic</span><span>Notes Filename</span><span>Assignment Filename</span></div>'+
+    '<div id="wk-'+i+'">'+wh+'</div>'+
+    '<button class="btn bo bs" style="margin-top:10px" onclick="addW('+i+')">+ Add Week</button>'+
+    '<hr class="sdiv"/><h3>Assignments</h3>'+
+    '<div class="wh"><span>Name</span><span>Description</span><span>Weight</span><span>PDF Filename</span></div>'+
+    '<div id="as-'+i+'">'+ah+'</div>'+
+    '<button class="btn bo bs" style="margin-top:10px" onclick="addA('+i+')">+ Add Assignment</button>'+
+    '</div>';
+}
+function H(s){if(s===null||s===undefined)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function readC(){
+    for(var i=0;i<C.length;i++){
+        var card=document.getElementById('cc-'+i);if(!card)continue;
+        var inputs=card.querySelectorAll('[data-f]');
+        for(var j=0;j<inputs.length;j++){
+            var el=inputs[j];var f=el.getAttribute('data-f');
+            if(el.getAttribute('data-w')!==null)continue;
+            if(el.getAttribute('data-a')!==null)continue;
+            C[i][f]=el.value;
+        }
+        var wc=document.getElementById('wk-'+i);
+        if(wc){
+            var wi=wc.querySelectorAll('.wi');C[i].weeks=[];
+            for(var j=0;j<wi.length;j++){
+                var ii=wi[j].querySelectorAll('input');
+                C[i].weeks.push({w:parseInt(ii[0].value)||0,t:ii[1].value,n:ii[2].value,a:ii[3].value});
+            }
+        }
+        var ac=document.getElementById('as-'+i);
+        if(ac){
+            var ai=ac.querySelectorAll('.wi');C[i].assigns=[];
+            for(var j=0;j<ai.length;j++){
+                var ii=ai[j].querySelectorAll('input');
+                C[i].assigns.push({name:ii[0].value,desc:ii[1].value,weight:ii[2].value,file:ii[3].value,sol:''});
+            }
+        }
+    }
+}
+
+function addC(){
+    readC();
+    C.push({id:'c'+Date.now(),code:'NEW',title:'New Course',slug:'new-course',onedrive:'#',category:'current',desc:'Description',fdesc:'Full description',sem:'Fall 2026',sched:'Mon/Wed 10:00 AM',room:'TBD',preq:'None',credits:'15',lectures:'',tutorials:'',independent:'',outcomes:[],assessment:[],weeks:[{w:1,t:'Topic',n:'week01.pdf',a:''}],weeks2:[],after:[],assigns:[]});
+    renderC();saveC();
+}
+function rmC(i){if(!confirm('Remove this course?'))return;readC();C.splice(i,1);localStorage.setItem('ec',JSON.stringify(C));renderC();}
+function addW(i){readC();var ws=C[i].weeks;var lw=ws.length>0?ws[ws.length-1].w:0;ws.push({w:lw+1,t:'New Topic',n:'',a:''});renderC();}
+function addA(i){readC();var n=C[i].assigns.length+1;C[i].assigns.push({name:'Assignment '+n,file:'assignment'+n+'.pdf',desc:'Description',weight:'',sol:''});renderC();}
+
+function genAll(){
+    readC();saveC();saveP();
+    var files={};
+    files['index.html']=mkIndex();
+    files['courses.html']=mkCourses();
+    for(var i=0;i<C.length;i++)files[C[i].slug+'.html']=mkCourse(C[i]);
+    var el=document.getElementById('dl-btns');el.style.display='grid';
+    var h='';var keys=Object.keys(files);window._files=files;
+    for(var i=0;i<keys.length;i++)h+='<div class="dlcard"><p>'+keys[i]+'</p><button class="btn bp" onclick="dl(\''+keys[i]+'\')">Download</button></div>';
+    el.innerHTML=h;alert('Files generated! Click Download on each one.');
+}
+function dl(name){
+    var b=new Blob([window._files[name]],{type:'text/html'});
+    var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);
+}
+
+function nav(cur){
+    return '<header id="header"><h1><a href="index.html" id="logo">'+H(P.name)+'</a></h1><nav id="nav"><a href="index.html"'+(cur==='home'?' class="current-page-item"':'')+'>Home</a><a href="courses.html"'+(cur==='courses'?' class="current-page-item"':'')+'>Courses</a><a href="https://janindunethmal.github.io/my-academic-portfolio/" target="_blank">Academic Portfolio</a></nav></header>';
+}
+function foot(){return '<div id="footer-wrapper"><div class="container"><div class="row"><div class="col-12"><div id="copyright">&copy; 2026 '+H(P.name)+'. All rights reserved.</div></div></div></div></div>';}
+function hwrap(cur){return '<div id="header-wrapper"><div class="container"><div class="row"><div class="col-12">'+nav(cur)+'</div></div></div></div>';}
+function scpt(){return '<script src="assets/js/jquery.min.js"><\/script><script src="assets/js/browser.min.js"><\/script><script src="assets/js/breakpoints.min.js"><\/script><script src="assets/js/util.js"><\/script><script src="assets/js/main.js"><\/script>';}
+
+function mkIndex(){
+    var ap=P.about.split('\n');var apH='';for(var i=0;i<ap.length;i++)if(ap[i].trim())apH+='<p>'+H(ap[i])+'</p>\n';
+    var cl='';for(var i=0;i<C.length;i++){if(C[i].category==='past')continue;cl+='<li><a href="'+encodeURI(C[i].slug+'.html')+'"><h4>'+H(C[i].code)+' - '+H(C[i].title)+'</h4></a><p>'+H(C[i].desc)+'</p></li>\n';}
+    var pcl='';for(var i=0;i<C.length;i++){if(C[i].category!=='past')continue;pcl+='<li><a href="'+encodeURI(C[i].slug+'.html')+'"><h4>'+H(C[i].code)+' - '+H(C[i].title)+'</h4></a><p>'+H(C[i].desc)+'</p></li>\n';}
+    var pastSection=pcl?'<section><h2>Past Courses</h2><ul class="small-image-list">\n'+pcl+'</ul></section>':'';
+    var ohH='';var oh=P.hours.split('\n');for(var i=0;i<oh.length;i++)if(oh[i].trim())ohH+='<p>'+H(oh[i])+'</p>\n';
+    return '<!DOCTYPE HTML>\n<html>\n<head>\n\t<title>'+H(P.name)+' - Academic Homepage</title>\n\t<meta charset="utf-8" />\n\t<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />\n\t<link rel="stylesheet" href="assets/css/main.css" />\n</head>\n<body>\n<div id="page-wrapper">\n'+hwrap('home')+'\n<div id="banner-wrapper"><div class="container"><div id="banner"><h2>Academic Homepage</h2><span>'+H(P.tag)+'</span></div></div></div>\n<div id="main"><div class="container"><div class="row main-row"><div class="col-8 col-12-medium">\n<section><h2>About Me</h2>\n'+apH+'</section>\n<section><h2>Current Courses</h2><ul class="small-image-list">\n'+cl+'</ul></section>\n'+pastSection+'<footer class="controls"><a href="courses.html" class="button">View All Courses</a></footer></div><div class="col-4 col-12-medium">\n<section><h2>Quick Links</h2><ul class="link-list"><li><a href="courses.html">All Courses</a></li><li><a href="mailto:'+H(P.email)+'">Email Me</a></li></ul></section>\n<section><h2>Research Interests</h2><p>'+H(P.research)+'</p></section>\n<section><h2>Office Hours</h2>\n'+ohH+'</section>\n<section><h2>Contact</h2><p>Email: '+H(P.email)+'</p><p>'+H(P.dept)+'</p><p>'+H(P.uni)+'</p></section>\n</div></div></div></div>\n'+foot()+'\n</div>\n'+scpt()+'\n</body>\n</html>';
+}
+
+function mkCourses(){
+    var cc='';for(var i=0;i<C.length;i++){if(C[i].category==='past')continue;cc+='<div class="col-6 col-12-medium"><section class="course-card"><h3><a href="'+encodeURI(C[i].slug+'.html')+'">'+H(C[i].code)+'</a></h3><h4>'+H(C[i].title)+'</h4><p>'+H(C[i].desc)+'</p><ul class="link-list"><li><a href="'+encodeURI(C[i].slug+'.html')+'">Course Page</a></li></ul></section></div>\n';}
+    var pc='';for(var i=0;i<C.length;i++){if(C[i].category!=='past')continue;pc+='<div class="col-6 col-12-medium"><section class="course-card"><h3><a href="'+encodeURI(C[i].slug+'.html')+'">'+H(C[i].code)+'</a></h3><h4>'+H(C[i].title)+'</h4><p>'+H(C[i].desc)+'</p><ul class="link-list"><li><a href="'+encodeURI(C[i].slug+'.html')+'">Course Page</a></li></ul></section></div>\n';}
+    var pcSection=pc?'<section><h2 style="margin-top:2em">Past Courses</h2><div class="row main-row">\n'+pc+'</div></div></section>':'';
+    return '<!DOCTYPE HTML>\n<html>\n<head>\n\t<title>Courses - '+H(P.name)+'</title>\n\t<meta charset="utf-8" />\n\t<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />\n\t<link rel="stylesheet" href="assets/css/main.css" />\n</head>\n<body>\n<div id="page-wrapper">\n'+hwrap('courses')+'\n<div id="main"><div class="container"><div class="row main-row"><div class="col-12"><section><h2>Courses</h2><p>Click on a course to access lecture notes, assignments, and other materials.</p></section></div></div>\n<section><h2 style="margin-top:2em">Current Courses</h2><div class="row main-row">\n'+cc+'</div></div>\n'+pcSection+'</div></div>\n'+foot()+'\n</div>\n'+scpt()+'\n</body>\n</html>';
+}
+
+function mkCourse(c){
+    var oh='';for(var j=0;j<c.outcomes.length;j++)oh+='<li>'+H(c.outcomes[j])+'</li>\n';
+    var ah='';for(var j=0;j<c.assessment.length;j++)ah+='<tr><td>'+H(c.assessment[j].name)+'</td><td>'+H(c.assessment[j].weight)+'</td></tr>\n';
+    var wr='';for(var j=0;j<c.weeks.length;j++){var w=c.weeks[j];wr+='<tr><td>'+w.w+'</td><td>'+H(w.t)+'</td><td>'+(w.a?H(w.a.replace('.pdf','').replace('assignment','Assignment ')):'-')+'</td></tr>\n';}
+    var ar='';for(var j=0;j<c.assigns.length;j++){var a=c.assigns[j];ar+='<tr><td>'+H(a.name)+'</td><td>'+H(a.desc)+'</td><td>'+H(a.weight)+'</td></tr>\n';}
+    var ref1='<p><strong>Calculus: Early Transcendentals</strong><br>Howard Anton, Irl C. Bivens, Stephen Davis<br>10th Edition, Wiley<br>ISBN: 978-0470647691</p>';
+    var ref2='<p><strong>Linear Algebra and Its Applications</strong><br>David Lay, Steven Lay, Judi McDonald<br>5th Edition, Pearson<br>ISBN: 978-0321982384</p>';
+    return '<!DOCTYPE HTML>\n<html>\n<head>\n\t<title>'+H(c.code)+' - '+H(c.title)+' - '+H(P.name)+'</title>\n\t<meta charset="utf-8" />\n\t<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />\n\t<link rel="stylesheet" href="assets/css/main.css" />\n</head>\n<body>\n<div id="page-wrapper">\n'+hwrap('courses')+'\n<div id="main"><div class="container"><div class="row main-row"><div class="col-12"><section>\n<h2>'+H(c.code)+' - '+H(c.title)+'</h2>\n<p><strong>Credits:</strong> '+H(c.credits)+' &nbsp;|&nbsp; <strong>Lectures:</strong> '+H(c.lectures)+' &nbsp;|&nbsp; <strong>Tutorials:</strong> '+H(c.tutorials)+'</p>\n</section></div></div>\n<div class="row main-row"><div class="col-8 col-12-medium">\n<section><h2>Module Overview</h2><p>'+H(c.fdesc)+'</p></section>\n<section><h2>Intended Learning Outcomes</h2><ul class="link-list" style="list-style:disc;padding-left:20px">\n'+oh+'</ul></section>\n<section><h2>Assessment</h2><table class="materials-table"><thead><tr><th>Component</th><th>Weight</th></tr></thead><tbody>\n'+ah+'</tbody></table></section>\n<section><h2>Course Materials</h2><p>All lecture notes, assignments, and other resources for this module are available on OneDrive.</p>\n<p style="margin:1em 0"><a href="'+H(c.onedrive||'#')+'" target="_blank" class="button" style="font-size:1.1em;padding:12px 30px">Access Course Materials on OneDrive</a></p></section>\n<section><h2>Weekly Schedule</h2>\n<table class="materials-table"><thead><tr><th>Week</th><th>Topic</th><th>Assignments</th></tr></thead><tbody>\n'+wr+'</tbody></table></section>\n<section><h2>Assignments</h2><table class="materials-table"><thead><tr><th>Assignment</th><th>Description</th><th>Weight</th></tr></thead><tbody>\n'+ar+'</tbody></table></section>\n</div><div class="col-4 col-12-medium">\n<section><h2>Course Information</h2><ul class="link-list"><li><strong>Instructor:</strong> '+H(P.name)+'</li><li><strong>Email:</strong> '+H(P.email)+'</li><li><strong>Office:</strong> '+H(P.office)+'</li></ul></section>\n<section><h2>Quick Links</h2><ul class="link-list"><li><a href="'+H(c.onedrive||'#')+'">Course Materials (OneDrive)</a></li><li><a href="#">Syllabus (PDF)</a></li><li><a href="#">Grading Policy</a></li></ul></section>\n<section><h2>Prerequisites</h2><p>'+H(c.preq)+'</p></section>\n<section><h2>Reference Material</h2>\n'+ref1+'\n'+ref2+'</section>\n<section><h2>Independent Learning</h2><p>'+H(c.independent)+'</p></section>\n</div></div></div></div>\n'+foot()+'\n</div>\n'+scpt()+'\n</body>\n</html>';
+}
+
+function pad(n){return n<10?'0'+n:''+n;}
+
+var uploadedFiles=[];
+var dz=document.getElementById('dropzone');
+var fi=document.getElementById('file-input');
+dz.onclick=function(){fi.click();};
+dz.ondragover=function(e){e.preventDefault();dz.classList.add('over');};
+dz.ondragleave=function(){dz.classList.remove('over');};
+dz.ondrop=function(e){e.preventDefault();dz.classList.remove('over');handleFiles(e.dataTransfer.files);};
+fi.onchange=function(){handleFiles(fi.files);};
+
+function handleFiles(files){
+    for(var i=0;i<files.length;i++){
+        if(files[i].name.toLowerCase().endsWith('.pdf')){
+            var found=false;
+            for(var j=0;j<uploadedFiles.length;j++){if(uploadedFiles[j].name===files[i].name){found=true;break;}}
+            if(!found)uploadedFiles.push(files[i]);
+        }
+    }
+    fi.value='';
+    renderMaterials();
+}
+
+function removeFile(name){
+    for(var i=0;i<uploadedFiles.length;i++){if(uploadedFiles[i].name===name){uploadedFiles.splice(i,1);break;}}
+    renderMaterials();
+}
+
+function renderMaterials(){
+    readC();
+    var out=document.getElementById('materials-output');
+    if(C.length===0){out.innerHTML='<div class="card"><div class="empty"><p>No courses defined. Add courses in the Courses tab first.</p></div></div>';return;}
+    var h='';
+    var totalExpected=0,totalFound=0;
+    for(var ci=0;ci<C.length;ci++){
+        var c=C[ci];
+        var expected=[];
+        for(var j=0;j<c.weeks.length;j++){
+            var w=c.weeks[j];
+            if(w.n)expected.push({file:w.n,type:'Lecture Notes',week:w.w,topic:w.t});
+            if(w.a)expected.push({file:w.a,type:'Assignment',week:w.w,topic:w.t});
+        }
+        for(var j=0;j<c.assigns.length;j++){
+            var a=c.assigns[j];
+            var exists=false;
+            for(var k=0;k<expected.length;k++){if(expected[k].file===a.file){exists=true;break;}}
+            if(!exists&&a.file)expected.push({file:a.file,type:'Assignment',week:0,topic:a.name});
+            if(a.sol){
+                var solExists=false;
+                for(var k=0;k<expected.length;k++){if(expected[k].file===a.sol){solExists=true;break;}}
+                if(!solExists)expected.push({file:a.sol,type:'Solution',week:0,topic:a.name+' Solution'});
+            }
+        }
+        var folder='materials/'+c.slug+'/';
+        var found=0;
+        for(var j=0;j<expected.length;j++){
+            totalExpected++;
+            var match=false;
+            for(var k=0;k<uploadedFiles.length;k++){
+                if(uploadedFiles[k].name.toLowerCase()===expected[j].file.toLowerCase()){match=true;break;}
+            }
+            if(match){found++;totalFound++;}
+            expected[j].found=match;
+        }
+        h+='<div class="card">';
+        h+='<h2>'+H(c.code)+' - '+H(c.title)+'</h2>';
+        h+='<div class="folder-box">'+H(folder)+'<button class="cpbtn" onclick="copyPath(this,\''+folder+'\')">Copy Path</button></div>';
+        h+='<div class="sumbox"><div class="sumitem"><div class="num">'+expected.length+'</div><div class="lbl">PDFs Expected</div></div><div class="sumitem"><div class="num" style="color:#27ae60">'+found+'</div><div class="lbl">Matched</div></div><div class="sumitem"><div class="num" style="color:#e74c3c">'+(expected.length-found)+'</div><div class="lbl">Missing</div></div></div>';
+        h+='<table class="mtable"><thead><tr><th>Status</th><th>Filename</th><th>Type</th><th>Week/Topic</th></tr></thead><tbody>';
+        for(var j=0;j<expected.length;j++){
+            var e=expected[j];
+            h+='<tr><td>'+(e.found?'<span class="ok">&#10003; Found</span>':'<span class="miss">&#10007; Missing</span>')+'</td><td><code>'+H(e.file)+'</code></td><td>'+H(e.type)+'</td><td>'+(e.week?'Week '+e.week+': '+H(e.topic):H(e.topic))+'</td></tr>';
+        }
+        h+='</tbody></table>';
+        if(uploadedFiles.length>0){
+            h+='<h3>Uploaded Files for This Course</h3><ul style="margin-left:20px;font-size:.9em">';
+            var anyMatched=false;
+            for(var j=0;j<uploadedFiles.length;j++){
+                var match=false;
+                for(var k=0;k<expected.length;k++){
+                    if(uploadedFiles[j].name.toLowerCase()===expected[k].file.toLowerCase()){match=true;break;}
+                }
+                if(match){h+='<li style="color:#27ae60">'+H(uploadedFiles[j].name)+' ('+fmtSize(uploadedFiles[j].size)+')</li>';anyMatched=true;}
+            }
+            if(!anyMatched)h+='<li style="color:#999">No matching files uploaded</li>';
+            h+='</ul>';
+        }
+        h+='</div>';
+    }
+    h+='<div class="card"><h2>How to Place PDFs</h2>';
+    h+='<div class="note">';
+    h+='<b>Step 1:</b> Create the folder structure in your website directory:<br>';
+    h+='<code>materials/'+H(C[0]?C[0].slug:'course-name')+'/</code><br><br>';
+    h+='<b>Step 2:</b> Copy the PDF files into the matching folders. Rename them if needed to match the filenames above.<br><br>';
+    h+='<b>Step 3:</b> Commit and push to GitHub:<br>';
+    h+='<code>git add materials/ && git commit -m "Add lecture notes" && git push</code>';
+    h+='</div></div>';
+    out.innerHTML=h;
+}
+
+function copyPath(btn,text){
+    if(navigator.clipboard){navigator.clipboard.writeText(text);btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy Path';},1500);}
+    else{var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy Path';},1500);}
+}
+
+function fmtSize(b){if(b<1024)return b+' B';if(b<1048576)return (b/1024).toFixed(1)+' KB';return (b/1048576).toFixed(1)+' MB';}
+
+document.getElementById('btn-save-profile').onclick=saveP;
+document.getElementById('btn-save-courses').onclick=saveC;
+document.getElementById('btn-add-course').onclick=addC;
+document.getElementById('btn-generate').onclick=genAll;
+
+loadP();loadC();
+</script>
+</body>
+</html>

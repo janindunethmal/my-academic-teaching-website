@@ -86,9 +86,9 @@ input, select, textarea {
 	body {
 		font-size: 13.5pt;
 		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-		background: linear-gradient(135deg, #0c0b0f 0%, #141218 40%, #0e0d12 70%, #09080c 100%);
+		background: linear-gradient(135deg, #0a1628 0%, #0e1f3d 40%, #0c1a33 70%, #081225 100%);
 		background-attachment: fixed;
-		color: #b8b0a4;
+		color: #9ab0cc;
 		letter-spacing: -0.2px;
 		line-height: 1.6;
 		-webkit-font-smoothing: antialiased;
@@ -104,15 +104,15 @@ input, select, textarea {
 		width: 100%;
 		height: 100%;
 		background:
-			radial-gradient(ellipse 700px 700px at 20% 15%, rgba(201, 168, 76, 0.045) 0%, transparent 70%),
-			radial-gradient(ellipse 500px 500px at 85% 80%, rgba(180, 140, 60, 0.03) 0%, transparent 70%),
-			radial-gradient(ellipse 400px 400px at 50% 50%, rgba(160, 120, 50, 0.025) 0%, transparent 70%);
+			radial-gradient(ellipse 700px 700px at 20% 15%, rgba(74, 158, 255, 0.045) 0%, transparent 70%),
+			radial-gradient(ellipse 500px 500px at 85% 80%, rgba(60, 140, 230, 0.03) 0%, transparent 70%),
+			radial-gradient(ellipse 400px 400px at 50% 50%, rgba(50, 130, 210, 0.025) 0%, transparent 70%);
 		pointer-events: none;
 		z-index: 0;
 	}
 
 	h1, h2, h3, h4 {
-		color: #f0e8d8;
+		color: #e0ecf8;
 		font-weight: 600;
 		letter-spacing: -0.4px;
 	}
@@ -128,7 +128,7 @@ input, select, textarea {
 	}
 
 	h3, h4 {
-		color: #d4c9b4;
+		color: #c0d0e4;
 		margin-bottom: 0.5em;
 	}
 
@@ -149,11 +149,11 @@ input, select, textarea {
 
 	p {
 		line-height: 1.85em;
-		color: #9e9484;
+		color: #8aa0bc;
 	}
 
 	strong {
-		color: #e8e0d0;
+		color: #d8e8f6;
 		font-weight: 600;
 	}
 
@@ -171,13 +171,13 @@ input, select, textarea {
 	}
 
 	a {
-		color: #c9a84c;
+		color: #4a9eff;
 		text-decoration: none;
 		transition: color 0.3s ease;
 	}
 
 		a:hover {
-			color: #e0c468;
+			color: #70b8ff;
 			text-decoration: none;
 		}
 
@@ -1509,7 +1509,7 @@ input, select, textarea {
 		}
 
 	ul.link-list li {
-		border-top: solid 1px rgba(201, 168, 76, 0.06);
+		border-top: solid 1px rgba(74, 158, 255, 0.06);
 		padding: 0.85em 0 0 0;
 		margin: 0.85em 0 0 0;
 	}
@@ -1521,7 +1521,7 @@ input, select, textarea {
 		}
 
 	ul.link-list li a {
-		color: rgba(240, 232, 216, 0.65);
+		color: rgba(200, 220, 245, 0.65);
 		font-weight: 500;
 		text-decoration: none;
 		transition: color 0.3s ease, padding-left 0.3s ease;
@@ -1530,25 +1530,25 @@ input, select, textarea {
 	}
 
 	ul.link-list li a:hover {
-		color: #c9a84c;
+		color: #4a9eff;
 		padding-left: 6px;
 		text-decoration: none;
 	}
 
 	.button {
-		background: rgba(201, 168, 76, 0.08);
+		background: rgba(74, 158, 255, 0.08);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		display: inline-block;
 		padding: 14px 36px;
-		background-color: rgba(201, 168, 76, 0.08);
+		background-color: rgba(74, 158, 255, 0.08);
 		border-radius: 10px;
 		text-decoration: none;
-		color: rgba(240, 232, 216, 0.85);
+		color: rgba(200, 220, 245, 0.85);
 		font-size: 1em;
 		font-weight: 500;
 		letter-spacing: 0.3px;
-		border: 1px solid rgba(201, 168, 76, 0.12);
+		border: 1px solid rgba(74, 158, 255, 0.12);
 		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 		transition: all 0.3s ease;
 		position: relative;
@@ -1556,12 +1556,12 @@ input, select, textarea {
 	}
 
 		.button:hover {
-			background: rgba(201, 168, 76, 0.14);
-			border-color: rgba(201, 168, 76, 0.2);
+			background: rgba(74, 158, 255, 0.14);
+			border-color: rgba(74, 158, 255, 0.2);
 			box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
 			transform: translateY(-2px);
 			text-decoration: none;
-			color: #f5efe3;
+			color: #f0ecff;
 		}
 
 		.button:active {
@@ -1584,8 +1584,8 @@ input, select, textarea {
 		margin: 2.5% 0 2.5% 0;
 		padding: 0 44px 0 44px;
 		border-radius: 14px;
-		border: 1px solid rgba(201, 168, 76, 0.08);
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(201, 168, 76, 0.04);
+		border: 1px solid rgba(74, 158, 255, 0.08);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(74, 158, 255, 0.04);
 		background-color: rgba(255, 255, 255, 0.035);
 		height: 80px;
 	}
@@ -1594,7 +1594,7 @@ input, select, textarea {
 			position: absolute;
 			left: 44px;
 			top: 0;
-			color: #f5efe3;
+			color: #f0ecff;
 			font-size: 2em;
 			font-weight: 700;
 			letter-spacing: -0.8px;
@@ -1602,13 +1602,13 @@ input, select, textarea {
 		}
 
 			#header h1 a {
-				color: #f5efe3;
+				color: #f0ecff;
 				text-decoration: none;
 				transition: color 0.3s ease;
 			}
 
 			#header h1 a:hover {
-				color: #c9a84c;
+				color: #4a9eff;
 				text-decoration: none;
 			}
 
@@ -1625,7 +1625,7 @@ input, select, textarea {
 			#header nav a {
 				display: inline-block;
 				text-decoration: none;
-				color: rgba(240, 232, 216, 0.5);
+				color: rgba(200, 220, 245, 0.5);
 				padding: 0 18px 0 18px;
 				outline: 0;
 				transition: color 0.3s ease, background 0.3s ease;
@@ -1635,14 +1635,14 @@ input, select, textarea {
 			}
 
 				#header nav a:hover {
-					color: rgba(201, 168, 76, 0.9);
-					background: rgba(201, 168, 76, 0.06);
+					color: rgba(74, 158, 255, 0.9);
+					background: rgba(74, 158, 255, 0.06);
 					text-decoration: none;
 				}
 
 				#header nav a.current-page-item {
-					color: #f0e8d8;
-					background: rgba(201, 168, 76, 0.08);
+					color: #e0ecf8;
+					background: rgba(74, 158, 255, 0.08);
 				}
 
 				#header nav a.current-page-item::after {
@@ -1652,7 +1652,7 @@ input, select, textarea {
 					left: 18px;
 					right: 18px;
 					height: 2px;
-					background: rgba(201, 168, 76, 0.65);
+					background: rgba(74, 158, 255, 0.65);
 					border-radius: 1px;
 				}
 
@@ -1672,7 +1672,7 @@ input, select, textarea {
 		background-size: cover;
 		background-position: center;
 		text-align: center;
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(201, 168, 76, 0.03);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(74, 158, 255, 0.03);
 		overflow: hidden;
 		display: flex;
 		align-items: center;
@@ -1688,7 +1688,7 @@ input, select, textarea {
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background: linear-gradient(135deg, rgba(12, 11, 15, 0.9) 0%, rgba(20, 18, 24, 0.82) 50%, rgba(14, 13, 18, 0.9) 100%);
+			background: linear-gradient(135deg, rgba(10, 22, 40, 0.9) 0%, rgba(14, 31, 61, 0.82) 50%, rgba(12, 26, 51, 0.9) 100%);
 			z-index: 1;
 		}
 
@@ -1699,7 +1699,7 @@ input, select, textarea {
 
 		#banner h2 {
 			font-size: 2.2em;
-			color: #f5efe3;
+			color: #f0ecff;
 			text-align: center;
 			letter-spacing: -1px;
 			margin: 0;
@@ -1746,7 +1746,7 @@ input, select, textarea {
 		height: 220px;
 		border-radius: 16px;
 		object-fit: cover;
-		border: 1px solid rgba(201, 168, 76, 0.1);
+		border: 1px solid rgba(74, 158, 255, 0.1);
 		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 		transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 		display: block;
@@ -1755,7 +1755,7 @@ input, select, textarea {
 	.about-photo:hover {
 		transform: translateY(-3px);
 		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-		border-color: rgba(201, 168, 76, 0.18);
+		border-color: rgba(74, 158, 255, 0.18);
 	}
 
 		.about-text-col {
@@ -1799,9 +1799,9 @@ input, select, textarea {
 		backdrop-filter: blur(24px);
 		-webkit-backdrop-filter: blur(24px);
 		padding: 4.5em 0;
-		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(201, 168, 76, 0.03);
-		border-top: 1px solid rgba(201, 168, 76, 0.04);
-		border-bottom: 1px solid rgba(201, 168, 76, 0.04);
+		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(74, 158, 255, 0.03);
+		border-top: 1px solid rgba(74, 158, 255, 0.04);
+		border-bottom: 1px solid rgba(74, 158, 255, 0.04);
 	}
 
 /* Footer */
@@ -1815,8 +1815,8 @@ input, select, textarea {
 
 	#copyright {
 		text-align: center;
-		color: rgba(240, 232, 216, 0.2);
-		border-top: solid 1px rgba(201, 168, 76, 0.05);
+		color: rgba(200, 220, 245, 0.2);
+		border-top: solid 1px rgba(74, 158, 255, 0.05);
 		padding: 3em 0 0 0;
 		margin: 3em 0 0 0;
 		font-size: 0.85em;
@@ -1824,12 +1824,12 @@ input, select, textarea {
 	}
 
 		#copyright a {
-			color: rgba(201, 168, 76, 0.3);
+			color: rgba(74, 158, 255, 0.3);
 			transition: color 0.3s ease;
 		}
 
 		#copyright a:hover {
-			color: rgba(201, 168, 76, 0.6);
+			color: rgba(74, 158, 255, 0.6);
 		}
 
 /* Large */
@@ -1947,7 +1947,7 @@ input, select, textarea {
 			}
 
 			#titleBar {
-				background: rgba(12, 11, 15, 0.92);
+				background: rgba(8, 14, 28, 0.92);
 				backdrop-filter: blur(24px);
 				-webkit-backdrop-filter: blur(24px);
 				-moz-backface-visibility: hidden;
@@ -1966,11 +1966,11 @@ input, select, textarea {
 				width: 100%;
 				z-index: 10001;
 				text-align: center;
-				color: rgba(240, 232, 216, 0.85);
+				color: rgba(200, 220, 245, 0.85);
 				font-size: 1.15em;
 				font-weight: 500;
-				background-color: rgba(12, 11, 15, 0.92);
-				border-bottom: 1px solid rgba(201, 168, 76, 0.06);
+				background-color: rgba(8, 14, 28, 0.92);
+				border-bottom: 1px solid rgba(74, 158, 255, 0.06);
 			}
 
 				#titleBar .title {
@@ -1997,8 +1997,8 @@ input, select, textarea {
 						width: 50px;
 						height: 35px;
 						border-radius: 8px;
-						background: rgba(201, 168, 76, 0.08);
-						border: 1px solid rgba(201, 168, 76, 0.1);
+						background: rgba(74, 158, 255, 0.08);
+						border: 1px solid rgba(74, 158, 255, 0.1);
 						box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 					}
 
@@ -2037,18 +2037,18 @@ input, select, textarea {
 				top: 0;
 				width: 275px;
 				z-index: 10002;
-				background: rgba(12, 11, 15, 0.97);
+				background: rgba(8, 14, 28, 0.97);
 				backdrop-filter: blur(24px);
 				-webkit-backdrop-filter: blur(24px);
-				color: #f0e8d8;
+				color: #e0ecf8;
 				box-shadow: 10px 0 40px rgba(0, 0, 0, 0.6);
-				border-right: 1px solid rgba(201, 168, 76, 0.05);
+				border-right: 1px solid rgba(74, 158, 255, 0.05);
 			}
 
 				#navPanel .link {
 					display: block;
-					color: rgba(240, 232, 216, 0.5);
-					border-top: solid 1px rgba(201, 168, 76, 0.05);
+					color: rgba(200, 220, 245, 0.5);
+					border-top: solid 1px rgba(74, 158, 255, 0.05);
 					border-bottom: solid 1px rgba(0, 0, 0, 0.15);
 					height: 52px;
 					line-height: 52px;
@@ -2060,8 +2060,8 @@ input, select, textarea {
 				}
 
 					#navPanel .link:hover {
-						background: rgba(201, 168, 76, 0.06);
-						color: rgba(201, 168, 76, 0.9);
+						background: rgba(74, 158, 255, 0.06);
+						color: rgba(74, 158, 255, 0.9);
 					}
 
 					#navPanel .link:first-child {
@@ -2132,7 +2132,7 @@ input, select, textarea {
 			}
 
 			ul.link-list li {
-				border-top-color: rgba(201, 168, 76, 0.06);
+				border-top-color: rgba(74, 158, 255, 0.06);
 			}
 
 			article.blog-post .comments {
@@ -2193,7 +2193,7 @@ input, select, textarea {
 			}
 
 			#copyright a {
-				color: rgba(201, 168, 76, 0.3);
+				color: rgba(74, 158, 255, 0.3);
 			}
 
 	}
@@ -2207,21 +2207,21 @@ input, select, textarea {
 			backdrop-filter: blur(12px);
 			-webkit-backdrop-filter: blur(12px);
 			margin-bottom: 20px;
-			border-left: 3px solid rgba(201, 168, 76, 0.35);
+			border-left: 3px solid rgba(74, 158, 255, 0.35);
 			border-radius: 14px;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(201, 168, 76, 0.03);
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(74, 158, 255, 0.03);
 			transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 			position: relative;
 			overflow: hidden;
-			border-top: 1px solid rgba(201, 168, 76, 0.05);
+			border-top: 1px solid rgba(74, 158, 255, 0.05);
 			border-right: 1px solid rgba(255, 255, 255, 0.03);
 			border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 		}
 
 		.course-card:hover {
 			transform: translateY(-4px);
-			box-shadow: 0 8px 36px rgba(0, 0, 0, 0.35), 0 0 20px rgba(201, 168, 76, 0.04), inset 0 1px 0 rgba(201, 168, 76, 0.06);
-			border-left-color: rgba(201, 168, 76, 0.55);
+			box-shadow: 0 8px 36px rgba(0, 0, 0, 0.35), 0 0 20px rgba(74, 158, 255, 0.04), inset 0 1px 0 rgba(74, 158, 255, 0.06);
+			border-left-color: rgba(74, 158, 255, 0.55);
 		}
 
 		.course-card::before {
@@ -2231,7 +2231,7 @@ input, select, textarea {
 			left: 0;
 			right: 0;
 			height: 1px;
-			background: linear-gradient(90deg, rgba(201, 168, 76, 0.4), transparent);
+			background: linear-gradient(90deg, rgba(74, 158, 255, 0.4), transparent);
 			opacity: 0;
 			transition: opacity 0.3s ease;
 		}
@@ -2245,35 +2245,35 @@ input, select, textarea {
 		}
 
 		.course-card h3 a {
-			color: #c9a84c;
+			color: #4a9eff;
 			text-decoration: none;
 			transition: color 0.2s ease, text-shadow 0.2s ease;
 		}
 
 		.course-card h3 a:hover {
-			color: #e0c468;
+			color: #70b8ff;
 			text-decoration: none;
-			text-shadow: 0 0 10px rgba(201, 168, 76, 0.2);
+			text-shadow: 0 0 10px rgba(74, 158, 255, 0.2);
 		}
 
 		.course-card h4 {
 			margin-bottom: 12px;
-			color: rgba(240, 232, 216, 0.4);
+			color: rgba(200, 220, 245, 0.4);
 			font-size: 0.9em;
 			font-weight: 400;
 		}
 
 		.course-card p {
-			color: #a09888;
+			color: #8aa0bc;
 			line-height: 1.7;
 		}
 
 		.course-card ul.link-list li {
-			border-top-color: rgba(201, 168, 76, 0.06);
+			border-top-color: rgba(74, 158, 255, 0.06);
 		}
 
 		.course-card ul.link-list li a {
-			color: #c9a84c;
+			color: #4a9eff;
 			font-weight: 500;
 		}
 
@@ -2287,14 +2287,14 @@ input, select, textarea {
 			-webkit-backdrop-filter: blur(12px);
 			border-radius: 14px;
 			overflow: hidden;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(201, 168, 76, 0.03);
-			border: 1px solid rgba(201, 168, 76, 0.06);
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(74, 158, 255, 0.03);
+			border: 1px solid rgba(74, 158, 255, 0.06);
 		}
 
 		.materials-table thead {
-			background: rgba(201, 168, 76, 0.1);
-			color: #f0e8d8;
-			border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+			background: rgba(74, 158, 255, 0.1);
+			color: #e0ecf8;
+			border-bottom: 1px solid rgba(74, 158, 255, 0.12);
 		}
 
 		.materials-table thead th {
@@ -2315,13 +2315,13 @@ input, select, textarea {
 		}
 
 		.materials-table tbody tr:hover {
-			background: rgba(201, 168, 76, 0.05);
+			background: rgba(74, 158, 255, 0.05);
 		}
 
 		.materials-table tbody td {
 			padding: 12px 18px;
 			font-size: 0.9em;
-			color: #a09888;
+			color: #8aa0bc;
 		}
 
 	/* PDF Links */
@@ -2348,7 +2348,7 @@ input, select, textarea {
 
 	/* Section Styling */
 		section h2 {
-			border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+			border-bottom: 1px solid rgba(74, 158, 255, 0.08);
 			padding-bottom: 10px;
 			margin-bottom: 20px;
 			position: relative;
@@ -2361,7 +2361,7 @@ input, select, textarea {
 			left: 0;
 			width: 50px;
 			height: 2px;
-			background: linear-gradient(90deg, rgba(201, 168, 76, 0.45), transparent);
+			background: linear-gradient(90deg, rgba(74, 158, 255, 0.45), transparent);
 			border-radius: 1px;
 		}
 

@@ -1,27 +1,967 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-	<title>Intensive Mathematics Course 2026 - 10 Days - UoC Tech - Janindu Nethmal</title>
+	<title>Intensive Mathematics Course 2026 - Faculty of Technology - University of Colombo</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
+	<style>
+		/* Smooth scrolling */
+		html { scroll-behavior: smooth; }
+
+		/* Course hero info bar */
+		.course-hero-info {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px 24px;
+			margin-top: 0.5em;
+		}
+		.course-hero-info span {
+			font-size: 0.88em;
+			color: rgba(200, 220, 245, 0.55);
+			font-weight: 400;
+		}
+		.course-hero-info span strong {
+			color: rgba(200, 220, 245, 0.7);
+			font-weight: 600;
+		}
+
+		/* Collapsible details */
+		details {
+			background: rgba(255, 255, 255, 0.025);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(74, 158, 255, 0.07);
+			border-radius: 12px;
+			margin-bottom: 12px;
+			overflow: hidden;
+			transition: border-color 0.3s ease;
+		}
+		details:hover {
+			border-color: rgba(74, 158, 255, 0.14);
+		}
+		details[open] {
+			border-color: rgba(74, 158, 255, 0.12);
+		}
+		details summary {
+			padding: 16px 20px;
+			cursor: pointer;
+			color: #e0ecf8;
+			font-weight: 600;
+			font-size: 1em;
+			list-style: none;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			transition: background 0.2s ease;
+			user-select: none;
+			border-radius: 12px;
+		}
+		details summary::-webkit-details-marker { display: none; }
+		details summary::before {
+			content: '\f105';
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 900;
+			font-size: 0.85em;
+			color: #4a9eff;
+			transition: transform 0.25s ease;
+			flex-shrink: 0;
+		}
+		details[open] summary::before {
+			transform: rotate(90deg);
+		}
+		details summary:hover {
+			background: rgba(74, 158, 255, 0.04);
+		}
+		details .detail-content {
+			padding: 4px 20px 18px 20px;
+		}
+		details .detail-content p {
+			margin-bottom: 10px;
+			line-height: 1.8;
+		}
+
+		/* Info cards grid */
+		.info-cards-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+			gap: 16px;
+			margin-bottom: 20px;
+		}
+		.info-card-item {
+			background: rgba(255, 255, 255, 0.03);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(74, 158, 255, 0.07);
+			border-radius: 12px;
+			padding: 22px 18px;
+			text-align: center;
+			transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+		}
+		.info-card-item:hover {
+			transform: translateY(-3px);
+			border-color: rgba(74, 158, 255, 0.16);
+			box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+		}
+		.info-card-item .card-icon {
+			font-size: 1.8em;
+			color: #4a9eff;
+			margin-bottom: 10px;
+			display: block;
+		}
+		.info-card-item .card-label {
+			color: #e0ecf8;
+			font-weight: 600;
+			font-size: 0.95em;
+			margin-bottom: 4px;
+		}
+		.info-card-item .card-value {
+			color: #8aa0bc;
+			font-size: 0.88em;
+			font-weight: 400;
+		}
+
+		/* Methodology icon cards */
+		.methodology-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 16px;
+			margin-bottom: 20px;
+		}
+		.method-card {
+			background: rgba(255, 255, 255, 0.03);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(74, 158, 255, 0.07);
+			border-radius: 12px;
+			padding: 24px 16px;
+			text-align: center;
+			transition: transform 0.3s ease, border-color 0.3s ease;
+		}
+		.method-card:hover {
+			transform: translateY(-3px);
+			border-color: rgba(74, 158, 255, 0.15);
+		}
+		.method-card .method-icon {
+			font-size: 1.6em;
+			color: #4a9eff;
+			margin-bottom: 10px;
+			display: block;
+		}
+		.method-card .method-label {
+			color: #e0ecf8;
+			font-weight: 500;
+			font-size: 0.92em;
+		}
+
+		/* Checklist */
+		.checklist {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.checklist li {
+			display: flex;
+			align-items: flex-start;
+			gap: 12px;
+			padding: 10px 0;
+			border-bottom: 1px solid rgba(74, 158, 255, 0.04);
+			color: #8aa0bc;
+			font-size: 0.95em;
+			line-height: 1.7;
+		}
+		.checklist li:last-child {
+			border-bottom: none;
+		}
+		.checklist li .check-icon {
+			color: #4a9eff;
+			flex-shrink: 0;
+			margin-top: 2px;
+			font-size: 0.85em;
+		}
+
+		/* Schedule table */
+		.schedule-table-wrap {
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+			margin: 20px 0;
+			border-radius: 14px;
+			border: 1px solid rgba(74, 158, 255, 0.06);
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+			background: rgba(255, 255, 255, 0.02);
+		}
+		.schedule-table {
+			width: 100%;
+			border-collapse: collapse;
+			min-width: 700px;
+		}
+		.schedule-table thead {
+			background: rgba(74, 158, 255, 0.1);
+		}
+		.schedule-table thead th {
+			padding: 14px 16px;
+			text-align: left;
+			font-weight: 600;
+			font-size: 0.92em;
+			color: #e0ecf8;
+			border-bottom: 1px solid rgba(74, 158, 255, 0.12);
+			white-space: nowrap;
+			cursor: default;
+			user-select: none;
+		}
+		.schedule-table thead th.sortable {
+			cursor: pointer;
+			transition: background 0.2s ease;
+		}
+		.schedule-table thead th.sortable:hover {
+			background: rgba(74, 158, 255, 0.06);
+		}
+		.schedule-table thead th.sortable::after {
+			content: '\f0dc';
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 900;
+			margin-left: 6px;
+			font-size: 0.8em;
+			opacity: 0.4;
+		}
+		.schedule-table tbody tr {
+			border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+			transition: background 0.2s ease;
+		}
+		.schedule-table tbody tr:nth-child(even) {
+			background: rgba(255, 255, 255, 0.012);
+		}
+		.schedule-table tbody tr:hover {
+			background: rgba(74, 158, 255, 0.04);
+		}
+		.schedule-table tbody td {
+			padding: 14px 16px;
+			font-size: 0.88em;
+			color: #8aa0bc;
+			vertical-align: top;
+			line-height: 1.6;
+		}
+		.schedule-table tbody td:first-child {
+			font-weight: 600;
+			color: #c0d0e4;
+			white-space: nowrap;
+			width: 80px;
+		}
+		.schedule-table tbody td:nth-child(2) {
+			font-weight: 500;
+			color: #b0c4de;
+		}
+		.schedule-table tbody td:nth-child(4) {
+			color: rgba(74, 158, 255, 0.85);
+			font-weight: 500;
+			white-space: nowrap;
+		}
+		.schedule-table .contents-list {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.schedule-table .contents-list li {
+			padding: 2px 0;
+			color: #8aa0bc;
+			font-size: 0.92em;
+			line-height: 1.5;
+		}
+		.schedule-table .contents-list li::before {
+			content: '\f0da';
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 900;
+			font-size: 0.75em;
+			color: rgba(74, 158, 255, 0.4);
+			margin-right: 8px;
+		}
+
+		/* Assessment cards */
+		.assessment-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 14px;
+			margin-bottom: 20px;
+		}
+		.assessment-card {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			background: rgba(255, 255, 255, 0.03);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(74, 158, 255, 0.07);
+			border-radius: 10px;
+			padding: 16px 18px;
+			transition: transform 0.2s ease, border-color 0.2s ease;
+		}
+		.assessment-card:hover {
+			transform: translateY(-2px);
+			border-color: rgba(74, 158, 255, 0.14);
+		}
+		.assessment-card .assess-icon {
+			font-size: 1.3em;
+			color: #4a9eff;
+			flex-shrink: 0;
+		}
+		.assessment-card .assess-name {
+			color: #e0ecf8;
+			font-weight: 600;
+			font-size: 0.95em;
+		}
+		.assessment-card .assess-desc {
+			color: #8aa0bc;
+			font-size: 0.85em;
+			margin-top: 2px;
+		}
+
+		/* Instructor card */
+		.instructor-card {
+			background: rgba(255, 255, 255, 0.035);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(74, 158, 255, 0.08);
+			border-radius: 12px;
+			padding: 22px;
+			margin-top: 20px;
+		}
+		.instructor-card .inst-label {
+			color: rgba(200, 220, 245, 0.45);
+			font-size: 0.82em;
+			text-transform: uppercase;
+			letter-spacing: 0.8px;
+			font-weight: 500;
+			margin-bottom: 6px;
+		}
+		.instructor-card .inst-name {
+			color: #e0ecf8;
+			font-weight: 600;
+			font-size: 1em;
+		}
+		.instructor-card .inst-detail {
+			color: #8aa0bc;
+			font-size: 0.88em;
+			margin-top: 6px;
+			line-height: 1.6;
+		}
+
+		/* Quick links */
+		.quick-links {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.quick-links li {
+			padding: 8px 0;
+			border-bottom: 1px solid rgba(74, 158, 255, 0.05);
+		}
+		.quick-links li:last-child { border-bottom: none; }
+		.quick-links li a {
+			color: rgba(200, 220, 245, 0.65);
+			font-weight: 500;
+			font-size: 0.92em;
+			transition: color 0.2s ease, padding-left 0.2s ease;
+			display: inline-block;
+		}
+		.quick-links li a:hover {
+			color: #4a9eff;
+			padding-left: 4px;
+		}
+
+		/* Objectives numbered list */
+		.objectives-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			counter-reset: obj-counter;
+		}
+		.objectives-list li {
+			display: flex;
+			align-items: flex-start;
+			gap: 10px;
+			padding: 7px 0;
+			border-bottom: 1px solid rgba(74, 158, 255, 0.04);
+			color: #8aa0bc;
+			font-size: 0.93em;
+			line-height: 1.65;
+			counter-increment: obj-counter;
+		}
+		.objectives-list li:last-child { border-bottom: none; }
+		.objectives-list li::before {
+			content: counter(obj-counter);
+			background: rgba(74, 158, 255, 0.1);
+			color: #4a9eff;
+			font-weight: 600;
+			font-size: 0.8em;
+			min-width: 24px;
+			height: 24px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 6px;
+			flex-shrink: 0;
+			margin-top: 2px;
+		}
+
+		/* Section nav */
+		.section-nav {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-bottom: 40px;
+		}
+		.section-nav a {
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid rgba(74, 158, 255, 0.08);
+			border-radius: 8px;
+			padding: 8px 16px;
+			color: rgba(200, 220, 245, 0.6);
+			font-size: 0.85em;
+			font-weight: 500;
+			text-decoration: none;
+			transition: all 0.2s ease;
+		}
+		.section-nav a:hover {
+			background: rgba(74, 158, 255, 0.08);
+			color: #4a9eff;
+			border-color: rgba(74, 158, 255, 0.15);
+		}
+
+		/* Responsive adjustments */
+		@media screen and (max-width: 736px) {
+			.info-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+			.methodology-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+			.assessment-grid { grid-template-columns: 1fr; }
+			.info-card-item { padding: 16px 12px; }
+			.info-card-item .card-icon { font-size: 1.4em; }
+			.method-card { padding: 18px 12px; }
+			.section-nav { gap: 6px; }
+			.section-nav a { padding: 6px 12px; font-size: 0.8em; }
+			.schedule-table { min-width: 600px; }
+			details summary { padding: 14px 16px; font-size: 0.95em; }
+			details .detail-content { padding: 4px 16px 14px 16px; }
+		}
+	</style>
 </head>
 <body>
 <div id="page-wrapper">
+
+<!-- Header -->
 <div id="header-wrapper"><div class="container"><div class="row"><div class="col-12"><header id="header"><h1><a href="index.html" id="logo">L. Janindu Nethmal Peiris</a></h1><nav id="nav"><a href="index.html">Home</a><a href="courses.html" class="current-page-item">Courses</a><a href="https://janindunethmal.github.io/my-academic-portfolio-website/" target="_blank">Academic Portfolio</a></nav></header></div></div></div></div>
-<div id="main"><div class="container"><div class="row main-row"><div class="col-12"><section>
-<h2>Intensive Mathematics Course 2026 - 10 Days - UoC Tech</h2>
-<p><strong>Duration:</strong> 08 June - 19 June 2026 &nbsp;|&nbsp; <strong>Institution:</strong> Faculty of Technology, University of Colombo</p>
-</section></div></div>
-<div style="margin-top:2em"><div class="row main-row"><div class="col-8 col-12-medium">
-<section><h2>Module Overview</h2><p>This intensive 10-day mathematics course covers core mathematical concepts including algebra, linear equations, matrices, vectors, calculus fundamentals, and mathematical modelling. Designed to provide a condensed yet comprehensive foundation in essential mathematics for university-level studies.</p></section>
-<section><h2>Course Materials</h2><p>All lecture notes, assignments, and other resources for this module are available on OneDrive.</p>
-<p style="margin:1em 0"><a href="https://1drv.ms/f/c/8fab2ed5d67792d9/IgCgRfk0WIwAQ6C5aoP3OC88AaH4FMjY8WLAItqMVWuGnlA?e=8JvoB0" target="_blank" class="button" style="font-size:1.1em;padding:12px 30px">Access Course Materials on OneDrive</a></p></section>
-</div><div class="col-4 col-12-medium">
-<section><h2>Course Information</h2><ul class="link-list"><li><strong>Instructor:</strong> Janindu Nethmal</li><li><strong>Email:</strong> janindunethmal@gmail.com</li></ul></section>
-</div></div></div></div></div>
-<div id="footer-wrapper"><div class="container"><div class="row"><div class="col-12"><div id="copyright">&copy; 2026 Janindu Nethmal. All rights reserved.</div></div></div></div></div>
+
+<!-- Main Content -->
+<div id="main">
+<div class="container">
+
+<!-- Hero Section -->
+<div class="row main-row"><div class="col-12"><section>
+<h2>Intensive Mathematics Course 2026</h2>
+<div class="course-hero-info">
+	<span><strong>Faculty of Technology</strong></span>
+	<span>&bull;</span>
+	<span>University of Colombo</span>
+	<span>&bull;</span>
+	<span>08 June &ndash; 19 June 2026</span>
+	<span>&bull;</span>
+	<span>10 Days</span>
 </div>
-<script src="assets/js/jquery.min.js"></script><script src="assets/js/browser.min.js"></script><script src="assets/js/breakpoints.min.js"></script><script src="assets/js/util.js"></script><script src="assets/js/main.js"></script>
+</section></div></div>
+
+<!-- Quick Navigation -->
+<nav class="section-nav" aria-label="Page sections">
+	<a href="#overview">Overview</a>
+	<a href="#objectives">Objectives</a>
+	<a href="#course-info">Course Info</a>
+	<a href="#schedule">Schedule</a>
+	<a href="#methodology">Methodology</a>
+	<a href="#outcomes">Learning Outcomes</a>
+	<a href="#assessments">Assessments</a>
+	<a href="#independent-learning">Independent Learning</a>
+	<a href="#prerequisites">Prerequisites</a>
+</nav>
+
+<!-- Two Column Layout -->
+<div class="row main-row"><div class="col-8 col-12-medium">
+
+<!-- Course Overview -->
+<section id="overview"><h2>Course Overview</h2>
+<p>The Intensive Mathematics Course is designed to provide incoming undergraduate students of the Faculty of Technology with the mathematical foundations required for university-level studies.</p>
+<p>The course emphasizes fundamental mathematical concepts and problem-solving techniques essential for engineering, technology and scientific applications.</p>
+<p>Through lectures, worked examples, tutorials and continuous assessments, students will develop analytical thinking and mathematical confidence before beginning their undergraduate studies.</p>
+</section>
+
+<!-- Course Objectives -->
+<section id="objectives"><h2>Course Objectives</h2>
+<p>Students completing this course should be able to:</p>
+<ol class="objectives-list">
+	<li>Explain the importance of mathematics in engineering and technology.</li>
+	<li>Perform calculations involving fractions, decimals, percentages, ratios and proportions.</li>
+	<li>Simplify algebraic expressions.</li>
+	<li>Apply algebraic identities.</li>
+	<li>Evaluate engineering formulae.</li>
+	<li>Solve linear equations.</li>
+	<li>Solve simultaneous equations.</li>
+	<li>Solve quadratic equations.</li>
+	<li>Solve inequalities.</li>
+	<li>Apply logarithmic laws.</li>
+	<li>Solve logarithmic equations.</li>
+	<li>Apply factorization techniques.</li>
+	<li>Perform partial fraction decomposition.</li>
+	<li>Understand matrices and perform basic matrix operations.</li>
+	<li>Understand functions and graphs.</li>
+	<li>Understand trigonometry and basic identities.</li>
+	<li>Understand introductory differentiation.</li>
+	<li>Apply derivatives to engineering problems.</li>
+	<li>Understand introductory integration.</li>
+	<li>Develop analytical and mathematical problem-solving skills.</li>
+</ol>
+</section>
+
+<!-- Detailed Course Schedule -->
+<section id="schedule"><h2>Detailed Course Schedule</h2>
+<p>Below is the complete 10-day course schedule covering all topics, contents and assessments.</p>
+
+<div class="schedule-table-wrap">
+<table class="schedule-table" role="table" aria-label="Course Schedule">
+<thead>
+<tr>
+	<th class="sortable" data-col="0" scope="col">Day</th>
+	<th class="sortable" data-col="1" scope="col">Topic</th>
+	<th scope="col">Contents</th>
+	<th scope="col">Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>Day 1</td>
+	<td>Mathematics in Technology, Numbers and Basic Algebra</td>
+	<td>
+		<ul class="contents-list">
+			<li>Importance of Mathematics</li>
+			<li>Mathematics in Technology</li>
+			<li>Real-Life Applications</li>
+			<li>Natural Numbers</li>
+			<li>Integers</li>
+			<li>Fractions</li>
+			<li>Decimals</li>
+			<li>Percentages</li>
+			<li>Ratios</li>
+			<li>Proportions</li>
+			<li>BODMAS</li>
+			<li>Number Systems</li>
+			<li>Algebraic Expressions</li>
+			<li>Algebraic Laws</li>
+			<li>Simplification</li>
+			<li>Expansion</li>
+			<li>Scientific Notation</li>
+			<li>Standard Form</li>
+		</ul>
+	</td>
+	<td>Quiz 01<br>Tutorial 01</td>
+</tr>
+<tr>
+	<td>Day 2</td>
+	<td>Formulae, Factorization and Partial Fractions</td>
+	<td>
+		<ul class="contents-list">
+			<li>Evaluation of Formulae</li>
+			<li>Engineering Formulae</li>
+			<li>Common Factors</li>
+			<li>Algebraic Identities</li>
+			<li>Expansion</li>
+			<li>Factorization</li>
+			<li>Introduction to Partial Fractions</li>
+			<li>Simple Partial Fractions</li>
+			<li>Applications</li>
+		</ul>
+	</td>
+	<td>Tutorial 02</td>
+</tr>
+<tr>
+	<td>Day 3</td>
+	<td>Equations and Simultaneous Equations</td>
+	<td>
+		<ul class="contents-list">
+			<li>Linear Equations</li>
+			<li>Equations with Fractions</li>
+			<li>Formula Transposition</li>
+			<li>Making a Variable the Subject</li>
+			<li>Simultaneous Equations</li>
+			<li>Substitution Method</li>
+			<li>Elimination Method</li>
+			<li>Engineering Applications</li>
+		</ul>
+	</td>
+	<td>Quiz 02<br>Tutorial 03</td>
+</tr>
+<tr>
+	<td>Day 4</td>
+	<td>Quadratic Equations, Inequalities and Logarithms</td>
+	<td>
+		<ul class="contents-list">
+			<li>Quadratic Equations</li>
+			<li>Factorization Method</li>
+			<li>Nature of Roots</li>
+			<li>Linear Inequalities</li>
+			<li>Quadratic Inequalities</li>
+			<li>Interval Notation</li>
+			<li>Introduction to Logarithms</li>
+			<li>Laws of Logarithms</li>
+			<li>Logarithmic Equations</li>
+			<li>Applications</li>
+		</ul>
+	</td>
+	<td>Tutorial 04</td>
+</tr>
+<tr>
+	<td>Day 5</td>
+	<td>Introduction to Matrices</td>
+	<td>
+		<ul class="contents-list">
+			<li>Definition of Matrices</li>
+			<li>Types of Matrices</li>
+			<li>Matrix Addition</li>
+			<li>Matrix Subtraction</li>
+			<li>Scalar Multiplication</li>
+			<li>Matrix Multiplication</li>
+			<li>Transpose of a Matrix</li>
+			<li>Introduction to Determinants</li>
+			<li>Applications</li>
+		</ul>
+	</td>
+	<td>Quiz 03<br>Tutorial 05</td>
+</tr>
+<tr>
+	<td>Day 6</td>
+	<td>Functions</td>
+	<td>
+		<ul class="contents-list">
+			<li>Relations</li>
+			<li>Functions</li>
+			<li>Domain</li>
+			<li>Range</li>
+			<li>Independent Variables</li>
+			<li>Dependent Variables</li>
+			<li>Function Notation</li>
+			<li>Evaluation of Functions</li>
+			<li>Linear Functions</li>
+			<li>Quadratic Functions</li>
+			<li>Graphs</li>
+			<li>Vertical Line Test</li>
+			<li>Applications</li>
+		</ul>
+	</td>
+	<td>Tutorial 06</td>
+</tr>
+<tr>
+	<td>Day 7</td>
+	<td>Introduction to Trigonometry</td>
+	<td>
+		<ul class="contents-list">
+			<li>Basic Geometry</li>
+			<li>Angles</li>
+			<li>Measurement of Angles</li>
+			<li>Types of Angles</li>
+			<li>Complementary Angles</li>
+			<li>Supplementary Angles</li>
+			<li>Standard Position</li>
+			<li>Quadrants</li>
+			<li>Coterminal Angles</li>
+			<li>Angle Relationships</li>
+			<li>Triangles</li>
+			<li>Trigonometric Ratios</li>
+			<li>Basic Identities</li>
+			<li>Applications</li>
+		</ul>
+	</td>
+	<td>Quiz 04<br>Tutorial 07</td>
+</tr>
+<tr>
+	<td>Day 8</td>
+	<td>Introduction to Differentiation</td>
+	<td>
+		<ul class="contents-list">
+			<li>Motivation</li>
+			<li>Tangents</li>
+			<li>Slopes</li>
+			<li>Informal Limits</li>
+			<li>Derivative Definition</li>
+			<li>Geometric Interpretation</li>
+			<li>Standard Derivatives</li>
+			<li>Basic Rules</li>
+			<li>Applications</li>
+		</ul>
+	</td>
+	<td>Tutorial 08</td>
+</tr>
+<tr>
+	<td>Day 9</td>
+	<td>Applications of Differentiation</td>
+	<td>
+		<ul class="contents-list">
+			<li>Higher Order Derivatives</li>
+			<li>Rates of Change</li>
+			<li>Motion</li>
+			<li>Stationary Points</li>
+			<li>Curve Sketching</li>
+			<li>Maxima</li>
+			<li>Minima</li>
+			<li>Optimization</li>
+			<li>Engineering Applications</li>
+		</ul>
+	</td>
+	<td>Quiz 05<br>Tutorial 09</td>
+</tr>
+<tr>
+	<td>Day 10</td>
+	<td>Introduction to Integration and Course Review</td>
+	<td>
+		<ul class="contents-list">
+			<li>Antiderivatives</li>
+			<li>Indefinite Integrals</li>
+			<li>Definite Integrals</li>
+			<li>Basic Integration Rules</li>
+			<li>Area Under Curves</li>
+			<li>Applications of Integration</li>
+			<li>Overall Course Review</li>
+		</ul>
+	</td>
+	<td>Final Examination<br>Tutorial 10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- Teaching Methodology -->
+<section id="methodology"><h2>Teaching Methodology</h2>
+<div class="methodology-grid">
+	<div class="method-card">
+		<span class="method-icon"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i></span>
+		<span class="method-label">Interactive Lectures</span>
+	</div>
+	<div class="method-card">
+		<span class="method-icon"><i class="fas fa-comments" aria-hidden="true"></i></span>
+		<span class="method-label">Guided Discussions</span>
+	</div>
+	<div class="method-card">
+		<span class="method-icon"><i class="fas fa-lightbulb" aria-hidden="true"></i></span>
+		<span class="method-label">Worked Examples</span>
+	</div>
+	<div class="method-card">
+		<span class="method-icon"><i class="fas fa-pen-fancy" aria-hidden="true"></i></span>
+		<span class="method-label">Classroom Exercises</span>
+	</div>
+	<div class="method-card">
+		<span class="method-icon"><i class="fas fa-book-open" aria-hidden="true"></i></span>
+		<span class="method-label">Tutorial Sessions</span>
+	</div>
+	<div class="method-card">
+		<span class="method-icon"><i class="fas fa-puzzle-piece" aria-hidden="true"></i></span>
+		<span class="method-label">Problem Solving Activities</span>
+	</div>
+	<div class="method-card">
+		<span class="method-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span>
+		<span class="method-label">Continuous Formative Assessments</span>
+	</div>
+</div>
+</section>
+
+<!-- Expected Learning Outcomes -->
+<section id="outcomes"><h2>Expected Learning Outcomes</h2>
+<p>Students completing this course will be able to:</p>
+<ul class="checklist" role="list">
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Demonstrate proficiency in fundamental mathematical concepts.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Perform accurate numerical calculations.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Solve algebraic problems confidently.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Apply mathematics to engineering and technology.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Solve linear, simultaneous and quadratic equations.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Apply logarithmic laws correctly.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Solve inequalities.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Manipulate mathematical formulae.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Demonstrate analytical thinking.</li>
+	<li><span class="check-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></span> Develop mathematical confidence for undergraduate studies.</li>
+</ul>
+</section>
+
+<!-- Assessments -->
+<section id="assessments"><h2>Assessments</h2>
+<div class="assessment-grid">
+	<div class="assessment-card">
+		<span class="assess-icon"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+		<div>
+			<div class="assess-name">Quiz 01</div>
+			<div class="assess-desc">Day 1</div>
+		</div>
+	</div>
+	<div class="assessment-card">
+		<span class="assess-icon"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+		<div>
+			<div class="assess-name">Quiz 02</div>
+			<div class="assess-desc">Day 3</div>
+		</div>
+	</div>
+	<div class="assessment-card">
+		<span class="assess-icon"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+		<div>
+			<div class="assess-name">Quiz 03</div>
+			<div class="assess-desc">Day 5</div>
+		</div>
+	</div>
+	<div class="assessment-card">
+		<span class="assess-icon"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+		<div>
+			<div class="assess-name">Quiz 04</div>
+			<div class="assess-desc">Day 7</div>
+		</div>
+	</div>
+	<div class="assessment-card">
+		<span class="assess-icon"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+		<div>
+			<div class="assess-name">Quiz 05</div>
+			<div class="assess-desc">Day 9</div>
+		</div>
+	</div>
+	<div class="assessment-card">
+		<span class="assess-icon"><i class="fas fa-book" aria-hidden="true"></i></span>
+		<div>
+			<div class="assess-name">Tutorial 01&ndash;10</div>
+			<div class="assess-desc">Daily Tutorials</div>
+		</div>
+	</div>
+	<div class="assessment-card">
+		<span class="assess-icon"><i class="fas fa-file-alt" aria-hidden="true"></i></span>
+		<div>
+			<div class="assess-name">Final Examination</div>
+			<div class="assess-desc">Day 10</div>
+		</div>
+	</div>
+</div>
+</section>
+
+<!-- Independent Learning -->
+<section id="independent-learning"><h2>Independent Learning</h2>
+<details open>
+	<summary>Self-Study Expectations</summary>
+	<div class="detail-content">
+		<p>Students are expected to revise lecture material daily to reinforce their understanding of the concepts covered. Regular review ensures that knowledge is consolidated and any gaps in understanding are identified early.</p>
+		<p>Completion of all tutorial exercises is essential for developing problem-solving skills. Students should attempt each tutorial independently before seeking assistance, using lecture notes and reference materials as guides.</p>
+		<p>Independent quiz preparation is strongly encouraged. Students should attempt sample problems and review past exercises to build confidence and readiness for the formal assessments.</p>
+		<p>Preparation for the final examination through structured self-study is critical. Students should allocate sufficient time for comprehensive revision of all 10 days of course content, focusing on both theoretical understanding and practical application.</p>
+	</div>
+</details>
+</section>
+
+<!-- Prerequisites -->
+<section id="prerequisites"><h2>Prerequisites</h2>
+<details open>
+	<summary>Entry Requirements</summary>
+	<div class="detail-content">
+		<p><strong>None.</strong></p>
+		<p>This course is intended for incoming undergraduate students of the Faculty of Technology. No prior university-level mathematics experience is required.</p>
+	</div>
+</details>
+</section>
+
+</div><!-- /col-8 -->
+
+<!-- Sidebar -->
+<div class="col-4 col-12-medium">
+
+<!-- Course Information -->
+<section id="course-info"><h2>Course Information</h2>
+<div class="info-cards-grid" style="grid-template-columns: 1fr;">
+	<div class="info-card-item">
+		<span class="card-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></span>
+		<div class="card-label">Course Name</div>
+		<div class="card-value">Intensive Mathematics Course 2026</div>
+	</div>
+</div>
+<ul class="link-list">
+	<li><strong>Institution:</strong> Faculty of Technology</li>
+	<li><strong>University:</strong> University of Colombo</li>
+	<li><strong>Duration:</strong> 10 Days</li>
+	<li><strong>Lecture Hours:</strong> Approximately 30&ndash;35 Contact Hours</li>
+	<li><strong>Tutorials:</strong> 10 Tutorial Sessions</li>
+	<li><strong>Assessments:</strong> 5 Quizzes, 10 Tutorials, Final Examination</li>
+</ul>
+</section>
+
+<!-- Quick Links -->
+<section><h2>Quick Links</h2>
+<ul class="quick-links">
+	<li><a href="#overview"><i class="fas fa-book-open" style="width:18px;margin-right:6px;color:#4a9eff;" aria-hidden="true"></i>Course Overview</a></li>
+	<li><a href="#objectives"><i class="fas fa-bullseye" style="width:18px;margin-right:6px;color:#4a9eff;" aria-hidden="true"></i>Course Objectives</a></li>
+	<li><a href="#schedule"><i class="fas fa-calendar-alt" style="width:18px;margin-right:6px;color:#4a9eff;" aria-hidden="true"></i>Daily Schedule</a></li>
+	<li><a href="#methodology"><i class="fas fa-chalkboard-teacher" style="width:18px;margin-right:6px;color:#4a9eff;" aria-hidden="true"></i>Teaching Methodology</a></li>
+	<li><a href="#outcomes"><i class="fas fa-graduation-cap" style="width:18px;margin-right:6px;color:#4a9eff;" aria-hidden="true"></i>Learning Outcomes</a></li>
+	<li><a href="#assessments"><i class="fas fa-clipboard-check" style="width:18px;margin-right:6px;color:#4a9eff;" aria-hidden="true"></i>Assessments</a></li>
+	<li><a href="#independent-learning"><i class="fas fa-book-reader" style="width:18px;margin-right:6px;color:#4a9eff;" aria-hidden="true"></i>Independent Learning</a></li>
+</ul>
+</section>
+
+<!-- Prerequisites -->
+<section><h2>Prerequisites</h2>
+<p>None. This course is intended for incoming undergraduate students of the Faculty of Technology.</p>
+</section>
+
+<!-- Course Materials -->
+<section><h2>Course Materials</h2>
+<p>All lecture notes, assignments and tutorial materials are available on OneDrive.</p>
+<p style="margin:1em 0"><a href="https://1drv.ms/f/c/8fab2ed5d67792d9/IgCgRfk0WIwAQ6C5aoP3OC88AaH4FMjY8WLAItqMVWuGnlA?e=8JvoB0" target="_blank" class="button" style="font-size:1em;padding:12px 24px">Access Course Materials on OneDrive</a></p>
+</section>
+
+<!-- Instructor Card -->
+<div class="instructor-card">
+	<div class="inst-label">Instructor</div>
+	<div class="inst-name">L. Janindu Nethmal Peiris</div>
+	<div class="inst-detail">
+		Faculty of Technology<br>
+		University of Colombo
+	</div>
+</div>
+
+</div><!-- /col-4 -->
+</div><!-- /row -->
+
+</div><!-- /container -->
+</div><!-- /main -->
+
+<!-- Footer -->
+<div id="footer-wrapper"><div class="container"><div class="row"><div class="col-12"><div id="copyright">&copy; 2026 Janindu Nethmal. All rights reserved.</div></div></div></div></div>
+
+</div><!-- /page-wrapper -->
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function() {
+	// Table sorting for schedule table
+	var table = document.querySelector('.schedule-table');
+	if (table) {
+		var headers = table.querySelectorAll('th.sortable');
+		headers.forEach(function(th) {
+			th.addEventListener('click', function() {
+				var col = parseInt(this.getAttribute('data-col'));
+				var tbody = table.querySelector('tbody');
+				var rows = Array.from(tbody.querySelectorAll('tr'));
+				var dir = this.getAttribute('data-dir') === 'asc' ? 'desc' : 'asc';
+				this.setAttribute('data-dir', dir);
+				rows.sort(function(a, b) {
+					var aVal = a.children[col].textContent.trim();
+					var bVal = b.children[col].textContent.trim();
+					if (dir === 'asc') return aVal.localeCompare(bVal, undefined, {numeric: true});
+					return bVal.localeCompare(aVal, undefined, {numeric: true});
+				});
+				rows.forEach(function(row) { tbody.appendChild(row); });
+			});
+		});
+	}
+})();
+</script>
 </body>
 </html>
